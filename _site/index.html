@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jam with Vite</title>
+</head>
+<body>
+  
+  <div id="component-root-1"> 
+    <div id="root"></div>   
+    <div><p>You&#x27;ve had around <!-- -->0<!-- --> glasses of water 💧</p><button>Add one</button></div>
+    </div>
+  
+  
+  <div id="component-root-2"> 
+    <div id="root"></div>   
+          <script type="module">
+      // wrap our import in "quotes" using JSON.stringify
+      import Component from "C:\\Users\\dom\\Desktop\\funkeeApp\\fapp\\_includes\\GlassButton.tsx";
+      import React from 'react';
+      import {createRoot} from 'react-dom/client';
+      import ReactDOM from 'react-dom';
+      createRoot(document.getElementById('root')).render(
+        React.createElement( Component )
+      )
+      
+      </script>
+    </div>
+  
+</body>
+</html>
