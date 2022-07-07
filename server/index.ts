@@ -12,6 +12,8 @@ const app: Express = express();
 const PORT = process.env.PORT || 4000;
 
 app.use( cors( {
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true,
   origin: ['http://localhost:3000', 'https://docs-app-miloisnotavailable.vercel.app']
 } ) )
 
