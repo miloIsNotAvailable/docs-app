@@ -1,0 +1,7 @@
+<body>
+    <div>
+        {%- for page in collections.pages -%}
+        {% react '{{ page.data.component | '' }}' %}
+        {%- endfor -%}
+      </div>
+</body>

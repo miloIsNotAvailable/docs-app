@@ -41,17 +41,7 @@ module.exports = function (eleventyConfig) {
   <div id="${componentRootId}"> 
     <div id="root"></div>   
     ${shipJavaScript
-      ? `      <script type="module">
-      // wrap our import in "quotes" using JSON.stringify
-      import Component from ${JSON.stringify(resolvedComponentPath)};
-      import React from 'react';
-      import {createRoot} from 'react-dom/client';
-      import ReactDOM from 'react-dom';
-      createRoot(document.getElementById('root')).render(
-        React.createElement( Component )
-      )
-      
-      </script>`
+      ? `      <script type="module" src="./_includes/Components/_App.tsx"></script>`
       : `${html}`
     }
     </div>
