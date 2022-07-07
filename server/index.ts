@@ -12,7 +12,7 @@ const app: Express = express();
 const PORT = process.env.PORT || 4000;
 
 app.use( cors( {
-  origin: ['http://localhost:3000', 'https://docs-app-miloisnotavailable.vercel.app/']
+  origin: ['http://localhost:3000', 'https://docs-app-miloisnotavailable.vercel.app']
 } ) )
 
 app.get( '/', ( req: Request, res: Response ) => {

@@ -23,7 +23,7 @@ type queryType<T=undefined> = {
     variables: T
 }
 
-const check_env = process.env.NODE_ENV !== 'production' ? 'http://localhost:4000' : 'https://docs-stuff.herokuapp.com/'
+const check_env = process.env.NODE_ENV !== 'production' ? 'http://localhost:4000' : 'https://docs-stuff.herokuapp.com'
 
 export const graphqlApi = createApi( {
     reducerPath: 'graphqlApi',
