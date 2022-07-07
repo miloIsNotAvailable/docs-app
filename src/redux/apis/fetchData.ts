@@ -23,11 +23,13 @@ type queryType<T=undefined> = {
     variables: T
 }
 
+const check_env = process.env.NODE_ENV !== 'production' ? 'http://localhost:4000' : 'https://docs-stuff.herokuapp.com/'
+
 export const graphqlApi = createApi( {
     reducerPath: 'graphqlApi',
     tagTypes: ['Hello', 'Theme'],
     baseQuery: graphqlBaseQuery( 
-        { baseUrl: `api/graphql` } ),
+        { baseUrl: `${ check_env }/graphql` } ),
     endpoints: ( { query, mutation } ) => ( {
         // query all docs 
         getAllPosts: query<any, queryType<undefined>>( {
