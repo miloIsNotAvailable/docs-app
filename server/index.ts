@@ -4,11 +4,16 @@ import { join } from 'path';
 import { graphqlHTTP } from 'express-graphql'
 import { schema } from './graphql/schema.js';
 import { resolver } from './graphql/resolvers.js';
+import cors from 'cors'
 
 dotenv.config();
 
 const app: Express = express();
 const PORT = process.env.PORT || 4000;
+
+app.use( cors( {
+  origin: ['http://localhost:3000', 'https://docs-app-miloisnotavailable.vercel.app/']
+} ) )
 
 app.get( '/', ( req: Request, res: Response ) => {
   res.sendFile( join( process.cwd(), '.', 'index.html' ) )
