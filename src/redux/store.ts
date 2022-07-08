@@ -1,10 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit'
 import { graphqlApi } from './apis/fetchData'
-// ...
+import getUserData from './slices/getUserFormData'
+
 export const store = configureStore({
   reducer: {
       // graphql api 
-      [graphqlApi.reducerPath]: graphqlApi.reducer
+      [graphqlApi.reducerPath]: graphqlApi.reducer,
+      getUserData
   },  
   /**
    * @description define middleware for 

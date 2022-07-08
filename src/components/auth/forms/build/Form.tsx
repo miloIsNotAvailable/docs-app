@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, MutableRefObject } from "react";
 import { styles } from "./FormStyles";
 
 type titleType = Omit<string, 'email' | 'password' | 'username'>
@@ -6,12 +6,13 @@ interface FormProps {
     title: titleType
     onClick?: () => any
     type?: 'email' | 'password' | 'text'
+    ref?: MutableRefObject<any>
 }
 
 const Form: FC<FormProps> = ( {
     onClick,
     title,
-    type="text"
+    type="text",
 } ) => {
 
     return (
