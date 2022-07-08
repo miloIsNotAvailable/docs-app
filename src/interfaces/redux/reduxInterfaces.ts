@@ -4,4 +4,4 @@ export type getUserDataType = {
     password: string
 }
 
-export type getUserDataState = { getUserData: getUserDataType }
+export type getUserDataState = { getUserData: Partial<getUserDataType> }

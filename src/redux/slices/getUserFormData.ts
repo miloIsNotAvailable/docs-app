@@ -1,10 +1,10 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { getUserDataType } from "../../interfaces/redux/reduxInterfaces";
 
-const initialState: getUserDataType = {
-    email: "",
-    password: "",
-    username: ""
+const initialState: Partial<getUserDataType> = {
+    email: undefined,
+    password: undefined,
+    username: undefined
 }
 
 const getUserFormData = createSlice( {
@@ -19,8 +19,8 @@ const getUserFormData = createSlice( {
                 state.email = action.payload.email
             },
         setPassword: ( 
-            state: getUserDataType, 
-            action: PayloadAction<getUserDataType> 
+            state: Partial<getUserDataType>, 
+            action: PayloadAction<Partial<getUserDataType>> 
             ) => {
                 
                 state.password = action.payload.password

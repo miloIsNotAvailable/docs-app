@@ -1,27 +1,20 @@
-import { FC, MutableRefObject } from "react";
+import { DetailedHTMLProps, FC, InputHTMLAttributes, MutableRefObject } from "react";
 import { styles } from "./FormStyles";
-
-type titleType = Omit<string, 'email' | 'password' | 'username'>
-interface FormProps {
-    title: titleType
-    onClick?: () => any
-    type?: 'email' | 'password' | 'text'
-    ref?: MutableRefObject<any>
-}
-
-const Form: FC<FormProps> = ( {
-    onClick,
-    title,
-    type="text",
-} ) => {
+/**
+ * 
+ * @function Form
+ * @description form layout, 
+ * it takes the same props as HTML input 
+ */
+const Form: FC<DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>> = ( 
+    v: DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>
+) => {
 
     return (
         <div className={ styles.wrap_form } tabIndex={ 0 }>
             <input 
                 className={ styles.form_input }
-                placeholder={ title as string }
-                onClick={ onClick }
-                type={ type }
+                { ...v }
             />
         </div>
     )

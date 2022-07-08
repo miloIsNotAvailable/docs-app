@@ -30,8 +30,16 @@
     font-size: 3vw;
 }
 
+.form_input:invalid {
+    color: #F99984
+}
+
 .form_input::placeholder {
     color: white;
     font-family: 'Poppins';
     font-size: inherit;
+}
+
+.form_input_error {
+    color: #F99984
 }
