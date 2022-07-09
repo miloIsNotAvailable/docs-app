@@ -6,10 +6,10 @@ const Redirect: FC = () => {
 
     return (
         <Link 
-            to="/signup" 
+            to="/" 
             className={ styles.login_redirect }
         >
-            regitser
+            back
         </Link>
     )
 }

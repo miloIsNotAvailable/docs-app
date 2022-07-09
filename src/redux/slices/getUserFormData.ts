@@ -25,9 +25,16 @@ const getUserFormData = createSlice( {
                 
                 state.password = action.payload.password
             },
+        setUsername: ( 
+            state: Partial<getUserDataType>, 
+            action: PayloadAction<Partial<getUserDataType>> 
+            ) => {
+                
+                state.username = action.payload.username
+            },
         },   
     } 
 )
 
-export const { setEmail, setPassword } = getUserFormData.actions
+export const { setEmail, setPassword, setUsername } = getUserFormData.actions
 export default getUserFormData.reducer

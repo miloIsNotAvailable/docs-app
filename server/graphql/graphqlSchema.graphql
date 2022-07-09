@@ -1,0 +1,14 @@
+  
+type UserData {
+    username: String!
+    email: String!
+    password: String!
+}
+
+type mutation {
+    getUserData( username: String!, email: String!, password: String! ): UserData
+}
+
+type Query {
+    hello: String
+}

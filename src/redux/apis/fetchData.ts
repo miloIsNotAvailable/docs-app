@@ -1,6 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { request } from 'graphql-request'
 import { argsToArgsConfig } from 'graphql/type/definition';
+import { UserDataType } from '../../interfaces/queries/UserData';
 
 /**
  * 
@@ -43,10 +44,33 @@ export const graphqlApi = createApi( {
                 body: body,
                 variables
             } )
-        } )
+        } ),
+        /**
+         * @param sendUserData
+         * sends user data to the server
+         */
+        sendUserData: mutation<any, queryType<UserDataType>>( {
+            query: ( { body, variables } ) => ( {
+                url: `/graphql`,
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: body,
+                variables
+            } ),
+            async onQueryStarted( { body, variables }, { dispatch, queryFulfilled } ) {
+                try {
+                    const { data } = await queryFulfilled
+                    console.log( data )
+                }catch( e ) {}
+            }
+        } ),
+
     } )
 } )
 
 export const { 
-    useGetAllPostsQuery
+    useGetAllPostsQuery,
+    useSendUserDataMutation
 } = graphqlApi

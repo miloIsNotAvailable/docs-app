@@ -2,6 +2,7 @@ import { AnimatePresence } from 'framer-motion'
 import { FC } from 'react'
 import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom'
 import Login from '../components/auth/login/build/Login'
+import Signup from '../components/auth/signup/build/Signup'
 
 const Router: FC = () => {
 
@@ -11,7 +12,7 @@ const Router: FC = () => {
         <AnimatePresence exitBeforeEnter>
             <Routes location={ location } key={ location.pathname }>
                 <Route path="/" element={ <Login/> }/>
-                <Route path="/home" element={ <div>hi</div> }/>
+                <Route path="/signup" element={ <Signup/> }/>
             </Routes>
         </AnimatePresence>
     )

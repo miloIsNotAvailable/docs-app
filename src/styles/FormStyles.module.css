@@ -41,5 +41,6 @@
 }
 
 .form_input_error {
-    color: #F99984
+    color: #F99984;
+    margin: -1rem 0;
 }

@@ -1,7 +1,18 @@
 import { FC } from "react";
 import { getUserDataState } from "../../../../interfaces/redux/reduxInterfaces";
+import { useSendUserDataMutation } from "../../../../redux/apis/fetchData";
 import { useAppSelector } from "../../../../redux/hooks";
 import { styles } from "../build/LoginStyles";
+
+const SEND_USER_DATA =  `
+mutation UserData($username:String, $email:String, $password:String) {
+    getUserData(username: $username, email:$email, password:$password){
+      username
+      email
+      password
+    }
+  }  
+`
 
 const validateEmail: 
 ( email: string ) => RegExpMatchArray | null 
@@ -15,9 +26,11 @@ const validateEmail:
 
 const Submit: FC = () => {
 
-    const { email, password } = useAppSelector( 
+    const { email, password, username } = useAppSelector( 
         ( state: getUserDataState ) => state.getUserData
      )
+
+    const [ createUser, { data, isLoading, isError } ] = useSendUserDataMutation()
 
      /**
       * @function handleSubmit
@@ -25,8 +38,20 @@ const Submit: FC = () => {
       * unless email is invalid or not provided
       */
     const handleSubmit: () => void = () => {
-        if( !email || !validateEmail( email ) || !password ) return
-        console.log( email, password )   
+        if( 
+            !email || 
+            !validateEmail( email ) || 
+            !password ||
+            !username 
+        ) return
+          createUser( {
+              body: SEND_USER_DATA,
+              variables: {
+                  email,
+                  password,
+                  username
+              }
+          } )
     }
 
     return (
@@ -36,7 +61,7 @@ const Submit: FC = () => {
                 opacity: !email || !validateEmail( email ) || !password ? .5 : 1
             } }
             onClick={ handleSubmit }>
-            proceed
+            { isLoading ? 'loading...' : 'proceed' }
         </div>
     )
 }
