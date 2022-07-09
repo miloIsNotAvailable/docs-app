@@ -1,5 +1,4 @@
 import { PrismaClient } from '@prisma/client'
-import { UserDataType } from '../../src/interfaces/queries/UserData'
 
 const prisma = new PrismaClient()
 
@@ -8,7 +7,7 @@ export const resolver = {
     hello: () => {
       return 'Hello!';
     },
-    getUserData: async( args: UserDataType ) => {
+    getUserData: async( args: any ) => {
       console.log( args )
       return args  
     }
