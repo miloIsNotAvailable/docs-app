@@ -66,11 +66,35 @@ export const graphqlApi = createApi( {
                 }catch( e ) {}
             }
         } ),
+        logInUser: mutation<any, queryType<Partial<UserDataType>>>( {
+            query: ( { body, variables } ) => ( {
+                url: `/graphql`,
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: body,
+                variables
+            } )
+        } ),
+        decodeJWT: mutation<any, queryType<{token: string}>>( {
+            query: ( { body, variables } ) => ( {
+                url: `/graphql`,
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: body,
+                variables
+            } )
+        } ),
 
     } )
 } )
 
 export const { 
     useGetAllPostsQuery,
-    useSendUserDataMutation
+    useSendUserDataMutation,
+    useLogInUserMutation,
+    useDecodeJWTMutation
 } = graphqlApi

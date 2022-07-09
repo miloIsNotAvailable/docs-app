@@ -1,6 +1,16 @@
 import { PrismaClient } from '@prisma/client'
+import jwt from 'jsonwebtoken'
+import dotenv from 'dotenv'
+import { v4 } from 'uuid'
+import pg from 'pg'
+import { ORM } from '../orm/ORM'
 
+dotenv.config()
+
+const client = new pg.Client( process.env.DATABASE_URL! )
+client.connect()
 const prisma = new PrismaClient()
+const orm = new ORM()
 
 // resolver function for each API endpoint
 export const resolver = {
@@ -8,7 +18,128 @@ export const resolver = {
       return 'Hello!';
     },
     getUserData: async( args: any ) => {
-      console.log( args )
-      return args  
+
+      // find users with provided email
+      const userExists: any = await orm.select( {
+        table: 'Users',
+        where: {
+          email: args?.email
+        }
+      } )
+      
+      console.log( userExists )
+
+      // throw an error if user length is > 0 exists 
+      if( userExists!.length ) return new Error( 'user already exists' )
+      
+      // generate refresh token 
+      // and save it to database
+      const refreshToken = jwt.sign( {
+        username: args?.username, 
+        email: args?.email
+      }, process.env.REFRESH_TOKEN!)
+
+      // create new user
+      const user = await orm.create( {
+        table: 'Users',
+        data: {
+          id: v4(),
+          sessionToken: refreshToken,
+          ...args
+        } 
+      })
+
+      // generate new access token
+      // with expiration date 
+      const accessToken = jwt.sign( {
+        id: user![0]?.id,
+        username: args?.username, 
+        email: args?.email
+      }, process.env.ACCESS_TOKEN! )
+
+      // save refresh token to db
+      await orm.create( {
+        table: 'Session',
+        data: {
+          token: refreshToken
+        }
+      } )
+
+      return { ...user![0], sessionToken: accessToken }  
+    },
+    logInUser: async( args: any ) => {
+     
+
+      
+      // find users with provided email
+      const user: any = await orm.select( {
+        table: 'Users',
+        where: {
+          email: args?.email
+        }
+      } )
+      
+      console.log( user )
+
+      // throw an error if user does not exist 
+      if( !user!.length ) return new Error( 'user does not exist' )
+      
+      const refreshToken = jwt.sign( {
+        id: user![0]?.id,
+        username: args?.username, 
+        email: args?.email
+      }, process.env.REFRESH_TOKEN!)
+
+      await orm.update( {
+        table: 'Users',
+        data: {
+          sessiontoken: refreshToken
+        },
+        where: {
+          id: user![0]?.id
+        }
+      } )
+
+      // generate new access token
+      // with expiration date 
+      const accessToken = jwt.sign( {
+        id: user![0]?.id,
+        username: args?.username, 
+        email: args?.email
+      }, process.env.ACCESS_TOKEN! )
+
+      return { ...user![0], sessionToken: refreshToken, accessToken }
+    },
+    decodeJWT: async( args: any ) => {
+
+      let accToken: any;
+
+      const accessToken: any = jwt.verify( args?.token, process.env.ACCESS_TOKEN! )
+
+      const user: any = await orm.select( {
+        table: 'Users',
+        where: {
+          id: accessToken?.id
+        }
+      } )
+
+      if( !user.length ) return
+
+      jwt.verify( user[0]?.sessionToken as string, process.env.REFRESH_TOKEN!, ( err, data ) => {
+      accToken = jwt.sign( {
+        id: user[0]?.id,
+        username: user[0]?.username, 
+        email: user[0]?.email
+      }, process.env.ACCESS_TOKEN! )
+      console.log( accToken )
+      } )
+
+      const data = jwt.verify( accToken, process.env.ACCESS_TOKEN! )
+      console.log( data )
+
+      return {
+        newToken: accToken,
+        data
+      }
     }
   };

@@ -5,6 +5,7 @@ import { graphqlHTTP } from 'express-graphql'
 import { schema } from './graphql/schema.js';
 import { resolver } from './graphql/resolvers.js';
 import cors from 'cors'
+import pg from 'pg'
 
 dotenv.config();
 
