@@ -44,7 +44,7 @@ export const resolver = {
         table: 'Users',
         data: {
           id: v4(),
-          sessionToken: refreshToken,
+          sessiontoken: refreshToken,
           ...args
         } 
       })
@@ -69,8 +69,6 @@ export const resolver = {
     },
     logInUser: async( args: any ) => {
      
-
-      
       // find users with provided email
       const user: any = await orm.select( {
         table: 'Users',
@@ -123,9 +121,15 @@ export const resolver = {
         }
       } )
 
+      console.log( user )
+
       if( !user.length ) return
 
-      jwt.verify( user[0]?.sessionToken as string, process.env.REFRESH_TOKEN!, ( err, data ) => {
+      if( !user[0]?.sessiontoken ) return {
+        newToken: null
+      }
+
+      jwt.verify( user[0]?.sessiontoken as string, process.env.REFRESH_TOKEN!, ( err, data ) => {
       accToken = jwt.sign( {
         id: user[0]?.id,
         username: user[0]?.username, 
@@ -141,5 +145,25 @@ export const resolver = {
         newToken: accToken,
         data
       }
+    },
+    logOutUser: async( args: any ) => {
+      const data = await orm.update( {
+        table: 'Users',
+        data: {
+          sessiontoken: ""
+        },
+        where: {
+          id: args?.id
+        }
+      } )
+      console.log( data )
+
+      const d = await orm.select( {
+        table: 'Users',
+        where: { id: args?.id }
+      } )
+      console.log( d )
+
+      return args
     }
   };

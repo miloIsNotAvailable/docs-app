@@ -27,6 +27,10 @@ type decodeJWT {
   data: UserData
 }
 
+type logOut {
+  id: String
+}
+
 type Query {
   hello: String
 }
@@ -35,5 +39,6 @@ type Mutation {
   getUserData( username: String, email: String, password: String ): UserData
   logInUser( username: String, email: String, password: String ): LoginUserData
   decodeJWT( token: String ): decodeJWT
+  logOutUser( id: String ): logOut
 }
 ` );

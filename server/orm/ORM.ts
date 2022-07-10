@@ -31,11 +31,11 @@ export class ORM {
         const client = await connect()
 
         const WHEREvals = where && Object.keys( where ).map(
-            n => `${ n }=${ where[n] }`
+            n => `${ n }='${ where[n] }'`
          )
 
          const ORvals = OR && Object.keys( OR ).map(
-            n => `${ OR }=${ where[n] }`
+            n => `${ OR }='${ where[n] }'`
          )
 
          const additionaqueryInfoWHERE = where ? `WHERE ${ WHEREvals }`: ""

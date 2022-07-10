@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { getUserDataState } from "../../../../interfaces/redux/reduxInterfaces";
 import { useLogInUserMutation } from "../../../../redux/apis/fetchData";
@@ -37,6 +37,17 @@ const Submit: FC = () => {
      const [ logInUser, { data, isLoading, isError } ] = useLogInUserMutation()
      const navigate = useNavigate()
 
+     useEffect( () => {
+      
+      // if done loading and user gets created 
+      // navigate to home
+
+      data?.logInUser?.accessToken && navigate( "/home" )
+      !isLoading && data?.logInUser?.accessToken && 
+      localStorage.setItem( 'sessionToken', data?.logInUser?.accessToken ) 
+
+      }, [ data ] )
+
      /**
       * @function handleSubmit
       * @returns email and password 
@@ -51,9 +62,6 @@ const Submit: FC = () => {
                 password
             }
         } )   
-        data && navigate( "/home" )
-        data?.logInUser?.accessToken && 
-        localStorage.setItem( 'sessionToken', data?.logInUser?.accessToken ) 
     }
 
     return (

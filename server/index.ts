@@ -6,6 +6,7 @@ import { schema } from './graphql/schema.js';
 import { resolver } from './graphql/resolvers.js';
 import cors from 'cors'
 import pg from 'pg'
+import { ORM } from './orm/ORM.js';
 
 dotenv.config();
 
@@ -29,6 +30,12 @@ app.use('/graphql', graphqlHTTP({
   graphiql: true,
 }));
 
+// const orm = new ORM()
+// const e = async() => {
+//   const data = await orm.delete( { table: 'Users', where:{ username:'jebbeccy' } } )
+//   console.log( data )
+// }
+// e()
 app.listen( PORT, () => {
   console.log(`⚡️ Server is running at https://localhost:${ PORT }`);
 });

@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { getUserDataState } from "../../../../interfaces/redux/reduxInterfaces";
 import { useSendUserDataMutation } from "../../../../redux/apis/fetchData";
@@ -33,8 +33,22 @@ const Submit: FC = () => {
         ( state: getUserDataState ) => state.getUserData
      )
 
-    const [ createUser, { data, isLoading, isError } ] = useSendUserDataMutation()
+    const [ createUser, { data, isLoading, isError } ] = useSendUserDataMutation( {
+      fixedCacheKey: 'sign-up-result'
+    } )
     const navigate = useNavigate()
+
+    useEffect( () => {
+      
+              // if done loading and user gets created 
+        // navigate to home
+        data?.getUserData?.sessionToken && 
+        !isLoading && !isError && navigate( '/home' )
+        
+        data?.getUserData?.sessionToken && 
+        localStorage.setItem( 'sessionToken', data?.getUserData?.sessionToken ) 
+
+    }, [ data ] )
 
      /**
       * @function handleSubmit
@@ -58,11 +72,7 @@ const Submit: FC = () => {
               }
           } )
 
-        // if done loading and user gets created 
-        // navigate to home
-        !isLoading && !isError && navigate( '/home' )
-        data?.getUserData?.sessionToken && 
-        localStorage.setItem( 'sessionToken', data?.getUserData?.sessionToken ) 
+          console.log( data?.getUserData?.sessionToken )
     }
 
     return (

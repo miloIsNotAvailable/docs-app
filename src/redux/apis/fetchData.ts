@@ -89,6 +89,18 @@ export const graphqlApi = createApi( {
             } )
         } ),
 
+        logOutUser: mutation<any, queryType<{id: string}>>( {
+            query: ( { body, variables } ) => ( {
+                url: `/graphql`,
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: body,
+                variables
+            } )
+        } ),
+        
     } )
 } )
 
@@ -96,5 +108,6 @@ export const {
     useGetAllPostsQuery,
     useSendUserDataMutation,
     useLogInUserMutation,
-    useDecodeJWTMutation
+    useDecodeJWTMutation,
+    useLogOutUserMutation
 } = graphqlApi
