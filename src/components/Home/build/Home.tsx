@@ -2,6 +2,7 @@ import { FC, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDecodeJWTMutation, useLogOutUserMutation } from "../../../redux/apis/fetchData";
 import Navbar from "../navbar/Navbar";
+import DisplayProjects from "../projects/DisplayProjects";
 import Bg from "./Bg";
 import { styles } from "./HomeStyles";
 import Title from "./Title";
@@ -80,7 +81,7 @@ const Home: FC = () => {
             <Title/>
             <div className={ styles.fill }/>
             <div className={ styles.fill }/>
-            <div className={ styles.fill }/>
+            <DisplayProjects/>
             <div className={ styles.fill }/>
             <div className={ styles.fill }/>
             <div className={ styles.fill }/>
