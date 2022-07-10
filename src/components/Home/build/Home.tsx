@@ -1,6 +1,10 @@
 import { FC, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useDecodeJWTMutation, useLogOutUserMutation, useSendUserDataMutation } from "../../redux/apis/fetchData";
+import { useDecodeJWTMutation, useLogOutUserMutation } from "../../../redux/apis/fetchData";
+import Navbar from "../navbar/Navbar";
+import Bg from "./Bg";
+import { styles } from "./HomeStyles";
+import Title from "./Title";
 
 const DECODE_JWT = `
 mutation jwt($token:String) {
@@ -67,8 +71,20 @@ const Home: FC = () => {
     }
 
     return (
-        <div onClick={ handleLogOut }>
-            hi
+        <div className={ styles.home_wrap }>
+            <Navbar/>
+            <div className={ styles.fill }/>
+            <div className={ styles.fill }/>
+            <Bg/>
+            <div className={ styles.fill }/>
+            <Title/>
+            <div className={ styles.fill }/>
+            <div className={ styles.fill }/>
+            <div className={ styles.fill }/>
+            <div className={ styles.fill }/>
+            <div className={ styles.fill }/>
+            <div className={ styles.fill }/>
+            <div className={ styles.fill }/>
         </div>
     )
 }

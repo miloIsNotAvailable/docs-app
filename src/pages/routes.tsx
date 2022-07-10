@@ -3,7 +3,7 @@ import { FC } from 'react'
 import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom'
 import Login from '../components/auth/login/build/Login'
 import Signup from '../components/auth/signup/build/Signup'
-import Home from '../components/Home/Home'
+import Home from '../components/Home/build/Home'
 
 const Router: FC = () => {
 
