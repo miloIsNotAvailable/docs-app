@@ -42,6 +42,11 @@ const Home: FC = () => {
         } )
     }, [] )
 
+    useEffect( () => {
+        !isLoading && data && !data?.decodeJWT?.newToken
+        && navigate( "/" )
+    }, [ data, isLoading ] )
+
     data && 
     localStorage.setItem( 'sessionToken', data?.decodeJWT?.newToken )
     console.log( data )

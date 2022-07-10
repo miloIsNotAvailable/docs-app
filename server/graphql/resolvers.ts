@@ -58,12 +58,12 @@ export const resolver = {
       }, process.env.ACCESS_TOKEN! )
 
       // save refresh token to db
-      await orm.create( {
-        table: 'Session',
-        data: {
-          token: refreshToken
-        }
-      } )
+      // await orm.create( {
+      //   table: 'Session',
+      //   data: {
+      //     token: refreshToken
+      //   }
+      // } )
 
       return { ...user![0], sessionToken: accessToken }  
     },
