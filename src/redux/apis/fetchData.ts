@@ -132,6 +132,20 @@ export const graphqlApi = createApi( {
                 variables
             } )
         } ),
+
+        getProject: query<any, queryType<{
+            id: string,
+        }>>( {
+            query: ( { body, variables } ) => ( {
+                url: `/graphql`,
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: body,
+                variables
+            } )
+        } ),
     } )
 } )
 
@@ -143,5 +157,7 @@ export const {
     useLogOutUserMutation,
     useCreateProjectMutation,
     useGetUserProjectsQuery,
-    useLazyGetUserProjectsQuery
+    useLazyGetUserProjectsQuery,
+    useGetProjectQuery,
+    useLazyGetProjectQuery
 } = graphqlApi

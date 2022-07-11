@@ -189,5 +189,16 @@ export const resolver = {
       } )
       console.log( data )
       return data![0]
+    },
+    getProjectById: async( args: any ) => {
+      
+      const data = await orm.select( {
+        table: "Project",
+        where: {
+          id: args?.id
+        }
+      } )
+      
+      return data![0]
     }
   };

@@ -48,6 +48,7 @@ type Project {
 type Query {
   hello: String
   projects( userId: String ): [Project]
+  getProjectById( id: String ): Project
 }
 
 type Mutation {

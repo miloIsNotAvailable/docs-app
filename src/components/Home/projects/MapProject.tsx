@@ -37,8 +37,9 @@ const MapProject: FC = () => {
             <NewProject/>
             {
                 !isLoading && data?.projects
-                .map( ( { title, content }: any, ind: number ) => (
+                .map( ( { title, content, id }: any, ind: number ) => (
                     <Project 
+                        id={ id }
                         key={ ind }
                         title={ title }
                         content={ content }
