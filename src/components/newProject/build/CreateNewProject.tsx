@@ -1,7 +1,6 @@
-import { FC } from "react";
+import { FC, useRef } from "react";
 import { useUserData } from "../../../contexts/UserContext";
 import { styles } from "./CreateNewProjectStyles";
-import Form from "../../auth/forms/build/Form";
 import NewProjectNavbar from "../navbar/NewProjectNavbar";
 import ProjectForm from "../projectForm/ProjectForm";
 
@@ -15,8 +14,7 @@ const CreateNewProject: FC = () => {
             <div className={ styles.new_project_title }>
                 { 'name your \nproject. ⮋' }
             </div>
-            <ProjectForm/>
-            <NewProjectNavbar/>
+            <NewProjectNavbar />
         </div>
     )
 }

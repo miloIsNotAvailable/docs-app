@@ -28,7 +28,7 @@ const check_env = process.env.NODE_ENV !== 'production' ? 'http://localhost:4000
 
 export const graphqlApi = createApi( {
     reducerPath: 'graphqlApi',
-    tagTypes: ['Hello', 'Theme'],
+    tagTypes: ['Hello', 'Theme', 'Project'],
     baseQuery: graphqlBaseQuery( 
         { baseUrl: `${ check_env }/graphql` } ),
     endpoints: ( { query, mutation } ) => ( {
@@ -100,7 +100,38 @@ export const graphqlApi = createApi( {
                 variables
             } )
         } ),
-        
+
+        createProject: mutation<any, queryType<{
+            userId: string,
+            content: string, 
+            title: string,
+        }>>( {
+            invalidatesTags: [ "Project" ],
+            query: ( { body, variables } ) => ( {
+                url: `/graphql`,
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: body,
+                variables
+            } )
+        } ),
+
+        getUserProjects: query<any, queryType<{
+            userId: string,
+        }>>( {
+            providesTags: [ "Project" ],
+            query: ( { body, variables } ) => ( {
+                url: `/graphql`,
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: body,
+                variables
+            } )
+        } ),
     } )
 } )
 
@@ -109,5 +140,8 @@ export const {
     useSendUserDataMutation,
     useLogInUserMutation,
     useDecodeJWTMutation,
-    useLogOutUserMutation
+    useLogOutUserMutation,
+    useCreateProjectMutation,
+    useGetUserProjectsQuery,
+    useLazyGetUserProjectsQuery
 } = graphqlApi

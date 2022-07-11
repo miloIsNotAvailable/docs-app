@@ -165,5 +165,29 @@ export const resolver = {
       console.log( d )
 
       return args
+    },
+    projects: async( args: any ) => {
+      const data = await orm.select( {
+        table: 'Project',
+        where: {
+          user_id: args?.userId
+        }
+      } )
+
+      return data
+    },
+    getNewProject: async( args: any ) => {
+      console.log( args ) 
+      const data = await orm.create( {
+        table: 'Project',
+        data: {
+          id: v4(),
+          content: "",
+          title: args?.title,
+          user_id: args?.userId
+        }
+      } )
+      console.log( data )
+      return data![0]
     }
   };

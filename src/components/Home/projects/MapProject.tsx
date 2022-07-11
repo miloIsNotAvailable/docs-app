@@ -1,16 +1,43 @@
-import { FC } from "react";
+import { FC, useEffect } from "react";
+import { useUserData } from "../../../contexts/UserContext";
+import { useGetUserProjectsQuery, useLazyGetUserProjectsQuery } from "../../../redux/apis/fetchData";
 import NewProject from "./NewProject";
 import Project from "./Project";
 import { styles } from "./ProjectStyles";
 
+const GET_PROJECTS = `
+query userProject( $userId:String ){
+    projects( userId: $userId ){
+      user_id
+      id
+      title
+      content
+    }
+  }`
+
 const MapProject: FC = () => {
+
+    const [ { id } ] = useUserData()
+    const [getUserProjects, { data, isLoading } ]= useLazyGetUserProjectsQuery()
+    
+    useEffect( () => {
+        if( !id ) return
+        getUserProjects( {
+            body: GET_PROJECTS,
+            variables: {
+                userId: id!
+            }
+        } )
+    }, [ id ] )
+
+    console.log( data?.projects )
 
     return (
         <div className={ styles.map_project }>
             <NewProject/>
             {
-                Array(10).fill( { title: 'lorem', content: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book" } )
-                .map( ( { title, content }, ind ) => (
+                !isLoading && data?.projects
+                .map( ( { title, content }: any, ind: number ) => (
                     <Project 
                         key={ ind }
                         title={ title }

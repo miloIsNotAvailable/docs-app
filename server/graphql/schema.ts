@@ -31,8 +31,23 @@ type logOut {
   id: String
 }
 
+type newProject {
+  id: String
+  userId: String
+  title: String
+  content: String
+}
+
+type Project {
+  user_id: String
+  id: String
+  title: String
+  content: String
+}
+
 type Query {
   hello: String
+  projects( userId: String ): [Project]
 }
 
 type Mutation {
@@ -40,5 +55,6 @@ type Mutation {
   logInUser( username: String, email: String, password: String ): LoginUserData
   decodeJWT( token: String ): decodeJWT
   logOutUser( id: String ): logOut
+  getNewProject( userId: String, content: String, title: String ): newProject
 }
 ` );

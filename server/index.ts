@@ -5,8 +5,8 @@ import { graphqlHTTP } from 'express-graphql'
 import { schema } from './graphql/schema.js';
 import { resolver } from './graphql/resolvers.js';
 import cors from 'cors'
-import pg from 'pg'
 import { ORM } from './orm/ORM.js';
+import { connect } from './orm/connectdb.js';
 
 dotenv.config();
 
@@ -32,10 +32,17 @@ app.use('/graphql', graphqlHTTP({
 
 // const orm = new ORM()
 // const e = async() => {
-//   const data = await orm.delete( { table: 'Users', where:{ username:'jebbeccy' } } )
-//   console.log( data )
+//   try {
+    
+//     const client = await connect()
+//     const data = await client.query( "CREATE TABLE Project( id STRING PRIMARY KEY, title STRING, content STRING, user_id STRING, FOREIGN KEY( user_id ) REFERENCES Users(id) );" )
+//     console.log( data )
+//   }catch(e) {
+//     console.log( e )
+//   }
 // }
 // e()
+
 app.listen( PORT, () => {
   console.log(`⚡️ Server is running at https://localhost:${ PORT }`);
 });
