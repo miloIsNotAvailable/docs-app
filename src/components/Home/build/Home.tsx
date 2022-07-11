@@ -1,5 +1,6 @@
 import { FC, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { UserContextProvider, useUserData } from "../../../contexts/UserContext";
 import { useDecodeJWTMutation, useLogOutUserMutation } from "../../../redux/apis/fetchData";
 import Navbar from "../navbar/Navbar";
 import DisplayProjects from "../projects/DisplayProjects";
@@ -30,31 +31,33 @@ mutation logOutUser($id: String){
 
 const Home: FC = () => {
 
-    const[ decodeJWT, { data, isLoading } ] = useDecodeJWTMutation()
+    // const[ decodeJWT, { data, isLoading } ] = useDecodeJWTMutation()
     // const [ createUser, { data: getUserData } ] = useSendUserDataMutation( {
     //     fixedCacheKey: 'sign-up-result'
     //   } )
 
+    const [ { email, id, username, isLoading, newToken } ] = useUserData()
+
     const navigate = useNavigate()
 
+    // useEffect( () => {
+
+    //     const token = localStorage.getItem( 'sessionToken' )
+
+    //     token && decodeJWT( {
+    //         body: DECODE_JWT,
+    //         variables: { token }
+    //     } )
+    // }, [] )
+
     useEffect( () => {
-
-        const token = localStorage.getItem( 'sessionToken' )
-
-        token && decodeJWT( {
-            body: DECODE_JWT,
-            variables: { token }
-        } )
-    }, [] )
-
-    useEffect( () => {
-        !isLoading && data && !data?.decodeJWT?.newToken
+        !isLoading && email && !newToken
         && navigate( "/" )
-    }, [ data, isLoading ] )
+    }, [ email, isLoading ] )
 
-    data && 
-    localStorage.setItem( 'sessionToken', data?.decodeJWT?.newToken )
-    console.log( data )
+    email && 
+    localStorage.setItem( 'sessionToken', newToken! )
+    // console.log( data )
 
     const [ logOutUser, logout ] = useLogOutUserMutation()
 
@@ -62,7 +65,7 @@ const Home: FC = () => {
         logOutUser( {
             body: LOG_OUT,
             variables: { 
-                id: data?.decodeJWT?.data?.id 
+                id: id! 
             }
         } )
         localStorage.setItem( 'sessionToken', "" )
@@ -73,7 +76,9 @@ const Home: FC = () => {
 
     return (
         <div className={ styles.home_wrap }>
-            <Navbar/>
+            <div onClick={ handleLogOut }>
+                <Navbar/>
+            </div>
             <div className={ styles.fill }/>
             <div className={ styles.fill }/>
             <Bg/>

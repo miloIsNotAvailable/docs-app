@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom'
 import Login from '../components/auth/login/build/Login'
 import Signup from '../components/auth/signup/build/Signup'
 import Home from '../components/Home/build/Home'
+import CreateNewProject from '../components/newProject/build/CreateNewProject'
 
 const Router: FC = () => {
 
@@ -15,6 +16,7 @@ const Router: FC = () => {
                 <Route path="/" element={ <Login/> }/>
                 <Route path="/signup" element={ <Signup/> }/>
                 <Route path="/home" element={ <Home/> }/>
+                <Route path="/new_project" element={ <CreateNewProject/> }/>
             </Routes>
         </AnimatePresence>
     )
