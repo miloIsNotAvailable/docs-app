@@ -1,7 +1,7 @@
 .doc_wrap {
     position: absolute;
     display: grid;
-    grid-template-rows: 5vw 3rem auto;
+    grid-template-rows: 3vw 2rem auto;
     width: 100%;
     height: calc(100%);
     font-family: 'Poppins';
@@ -10,19 +10,19 @@
 
 .doc_title_wrap {
     display: grid;
-    grid-template-columns: 5vw auto;
+    grid-template-columns: 3vw auto;
     align-items: center;
 }
 
 .doc_icon {
     display: grid;
     place-self: center;
-    width: calc(100% - 1rem);
-    height: calc(100% - 1rem);
+    width: calc(100% - 1.5rem);
+    height: calc(100% - 1.5rem);
 }
 
 .doc_title {
-    font-size: 3vw;
+    font-size: 1.5vw;
     font-weight: bolder;
 }
 
@@ -47,4 +47,21 @@
     height: 100%;
     background-color: var(--dark);
     border-radius: 0 10rem 0 0;
+    outline: none;
+    border: none;
+}
+
+.top_navbar_wrap {
+    display: grid;
+    max-width:50%;    
+    grid-template-columns: repeat(4, auto);
+    gap: 1rem;
+    margin: 0 1rem;
+    align-self: center;
+}
+
+.top_navbar {
+    cursor: pointer;
+    font-size: 1vw;
+    font-weight: normal;
 }

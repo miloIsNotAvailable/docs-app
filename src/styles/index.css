@@ -24,3 +24,19 @@ code {
   --blue: #ACE6FF;
   --yellow: #F3D496;
 }
+
+.ql-editor {
+  outline: none;
+  border: none;
+  width: 80%;
+  word-break: keep-all;
+  padding: 1rem;
+  /* text-align: center; */
+}
+
+.ql-clipboard {
+  width: 0;
+  height: 0;
+  opacity: 0;
+  visibility: collapse;
+}

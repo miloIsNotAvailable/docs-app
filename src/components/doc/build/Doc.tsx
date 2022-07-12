@@ -4,6 +4,7 @@ import { DocContextProvider } from "../../../contexts/DocContext";
 import { useLazyGetProjectQuery } from "../../../redux/apis/fetchData";
 import Mainscreen from "../mainscreen/Mainscreen";
 import Navbar from "../navbar/Navbar";
+import TopNavbar from "../navbar/TopNavbar";
 import { styles } from "./DocStyles";
 import DocTitle from "./DocTitle";
 
@@ -40,7 +41,7 @@ const Doc: FC = () => {
         <DocContextProvider value={ data?.getProjectById || { content: undefined, id: undefined, title: undefined, user_id: undefined } }>
             <div className={ styles.doc_wrap }>
                 <DocTitle/>
-                <div></div>
+                <TopNavbar/>
                 <div className={ styles.main_doc_wrap }>
                     <Navbar/>
                     <Mainscreen/>
