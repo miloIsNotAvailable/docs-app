@@ -13,7 +13,7 @@ type stateType = {
 }
 type actionType = { type: OmitVals }
 
-const initialState: stateType = { weight: "regular", is: false }
+const initialState: stateType = { weight: "regular", is: true }
 
 const reducer: ( 
     state: stateType, 
@@ -25,7 +25,7 @@ const reducer: (
         case "italic":
             return { weight: "italic", is: weight === "italic" && !is }
         default: 
-            return { weight: 'regular', is: is }
+            return { weight, is }
     }
 }
 
@@ -56,6 +56,7 @@ const FontWeight: FC = () => {
             {
                 arr.map( ( { icon, type } ) => (
                     <img 
+                        key={ type }
                         src={ icon } 
                         onClick={ e=> handleOnClick( e, type )  }
                     />

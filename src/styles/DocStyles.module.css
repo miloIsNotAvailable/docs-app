@@ -40,6 +40,7 @@
     width: 100%;
     height: 100%;
     background-color: var(--bg);
+    padding: 0 .5rem;
 }
 
 .main_doc {
@@ -72,4 +73,64 @@
     justify-content: space-around;
     width: 100%;
     height: 3vw;
+}
+
+.font_sizes_wrap {
+    position: relative;
+    display: grid;
+    grid-template-rows: 3vw auto;
+    height: 3vw;
+}
+
+.current_font_size {
+    display: grid;
+    grid-template-columns: auto 3vw;
+    place-self: center;
+}
+
+.more {
+    display: grid;
+    place-self: center;
+    width: calc(100% - .8rem);
+    height: calc(100% - .8rem)
+}
+
+.wrap_navbar_row {
+    display: flex;
+    flex-direction: row;
+}
+
+.sizes_list {
+    cursor: pointer;
+    position: absolute;
+    flex-direction: column;
+    display: flex;
+    max-height: 0;
+    top: 100%;
+    left: 100%;
+    width: 5rem;
+    transform: translate(-50%, 0);
+    overflow-y: scroll;
+    list-style-type: none;
+    background-color: var(--bg);
+    box-shadow: 5px 5px 10px 10px rgba( 0, 0, 0, 0.1 );
+    border-radius: .5rem;
+    text-align: start;
+}
+
+.sizes_list::-webkit-scrollbar {
+    width: 5px;
+}
+
+.sizes_list::-webkit-scrollbar-thumb {
+    background-color: var(--grey);
+}
+
+.font_sizes_wrap:focus .sizes_list, .font_sizes_wrap:active .sizes_list{
+    max-height: 10rem;   
+}
+
+.font_size_input {
+    border:none;
+    outline: none
 }
