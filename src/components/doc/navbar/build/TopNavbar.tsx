@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { styles } from "../build/DocStyles";
+import { styles } from "../../build/DocStyles";
 
 const TopNavbar: FC = () => {
     
