@@ -46,7 +46,12 @@ const FontSizes: FC = () => {
                             return 
                         }
                         
-                        setCurrentSize( findClosest(parseInt(inputRef.current?.innerText), fontSizes) as arrType )
+                        setCurrentSize( 
+                            findClosest(
+                                parseInt(inputRef.current?.innerText)
+                                , fontSizes
+                            ) as arrType 
+                        )
                     } }  
                     className={ styles.font_size_input }
                     ref={ inputRef } 

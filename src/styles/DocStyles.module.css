@@ -85,14 +85,15 @@
 .current_font_size {
     display: grid;
     grid-template-columns: auto 3vw;
-    place-self: center;
+    place-items: center;
 }
 
 .more {
     display: grid;
     place-self: center;
-    width: calc(100% - .8rem);
-    height: calc(100% - .8rem)
+    width: 1vw;
+    height: 1vw;
+    transition: all 100ms ease;
 }
 
 .wrap_navbar_row {
@@ -116,6 +117,7 @@
     box-shadow: 5px 5px 10px 10px rgba( 0, 0, 0, 0.1 );
     border-radius: .5rem;
     text-align: start;
+    transition: all 100ms ease;
 }
 
 .sizes_list::-webkit-scrollbar {
@@ -130,7 +132,54 @@
     max-height: 10rem;   
 }
 
+.font_sizes_wrap:focus .more, .font_sizes_wrap:active .more{
+    transform: rotate(180deg);
+}
+
 .font_size_input {
     border:none;
     outline: none
+}
+
+.font_family {
+    position: relative;
+    display: grid;
+    grid-template-columns: auto 3vw;
+    width: calc(100% - 2rem);
+    height: 3vw;
+    align-items: center;
+}
+
+.family_list {
+    position: absolute;
+    top: 100%;
+    width: 100%;
+    height: 12rem;
+    max-height: 0;
+    overflow-y: scroll;
+    background-color: var(--bg);
+    box-shadow: 5px 5px 10px 10px rgba( 0, 0, 0, 0.1 );
+    z-index: 2;
+    transition: all 100ms ease;
+}
+
+.font_family:focus .family_list, .font_family:active .family_list{
+    max-height: 12rem;   
+}
+
+.font_family:focus .more, .font_family:active .more{
+    transform: rotate(180deg);
+}
+
+.font_style {
+    cursor: pointer;
+    margin: 1rem 0;
+}
+
+.family_list::-webkit-scrollbar {
+    width: 5px;
+}
+
+.family_list::-webkit-scrollbar-thumb {
+    background-color: var(--grey);
 }
