@@ -1,13 +1,31 @@
-import { FC, useEffect } from "react";
+import { FC, useCallback, useEffect } from "react";
 import { styles } from "../build/DocStyles";
 import { useQuill } from "../../../constants/quillConstants";
 import Quill from "quill";
 import { useQuillContext } from "../../../contexts/QuillContext";
+import { debounce } from "./debounce";
+import { useUpdateDocContentMutation } from "../../../redux/apis/fetchData";
+import { useDocData } from "../../../contexts/DocContext";
+
+const UPDATE_DOC = `
+mutation docContent( $id: String, $content:String ) {
+    updateDocContent( id: $id, content: $content ) {
+      id
+      content
+    }
+  }
+`
 
 const Mainscreen: FC = () => {
 
     const quill = useQuillContext()
-    console.log( quill )
+    const [ { id, content } ] = useDocData()
+    console.log( content )
+
+    useEffect( () => {
+        if( !content || !quill ) return
+        quill.setContents( JSON.parse( content ) )
+    }, [ quill, content ] )
 
     useEffect( () => {
         if( !quill ) return 
@@ -110,6 +128,31 @@ const Mainscreen: FC = () => {
         Quill.register( AlignBlot )
         Quill.register( Align, true )
     }, [ quill ] ) 
+    
+    const [ setUpdateDocContent, { data, isLoading } ] = useUpdateDocContentMutation()
+
+    const e = debounce( ( args: any, id: any ) => {
+        
+        if( !id ) return
+
+        const data = JSON.stringify( args )
+        console.log( data, id )
+
+        setUpdateDocContent( {
+            body: UPDATE_DOC,
+            variables: {
+                id: id!,
+                content: data
+            }
+        } )
+    }, 1000 )
+    const v = useCallback(e, [])
+
+    useEffect( () => {
+        const doc = document.getElementsByClassName( 'ql-editor' )
+        if( !doc || !quill ) return 
+        quill.on( 'text-change', () => v( quill?.getContents()?.ops, id ))
+    } )
 
     return (
         <div 

@@ -200,5 +200,19 @@ export const resolver = {
       } )
       
       return data![0]
+    },
+
+    updateDocContent: async( args: any ) => {
+      const data = await orm.update( {
+        table: 'Project',
+        data: {
+          content: args?.content
+        },
+        where: {
+          id: args?.id
+        }
+      } )
+      console.log( data )
+      return args
     }
   };

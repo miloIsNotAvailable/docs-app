@@ -42,7 +42,7 @@ const MapProject: FC = () => {
                         id={ id }
                         key={ ind }
                         title={ title }
-                        content={ content }
+                        content={ content && JSON.parse( content ).map( ( n: any ) => n?.insert ).join( " " ) }
                     />
                 ) )
             }

@@ -45,6 +45,11 @@ type Project {
   content: String
 }
 
+type updateContent {
+  id: String,
+  content: String
+}
+
 type Query {
   hello: String
   projects( userId: String ): [Project]
@@ -56,6 +61,7 @@ type Mutation {
   logInUser( username: String, email: String, password: String ): LoginUserData
   decodeJWT( token: String ): decodeJWT
   logOutUser( id: String ): logOut
+  updateDocContent( id: String, content: String ): updateContent
   getNewProject( userId: String, content: String, title: String ): newProject
 }
 ` );
