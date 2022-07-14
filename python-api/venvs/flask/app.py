@@ -31,7 +31,7 @@ type_defs = gql("""
 
 @mutation.field( 'Suggestion' )
 def resolve_suggestion(*_, userInput): 
-    return { 'userInput': 'hello' }
+    return { 'userInput': userInput }
 
 app = Flask(__name__)
 
