@@ -145,11 +145,16 @@ const Mainscreen: FC = () => {
                 newSuggestion( {
                     body: SUGGESTION,
                     variables: {
-                        userInput: 'hank hill'
+                        userInput: quill?.getText()
                     }
                 } )
             }
-            console.log( data, isLoading )
+            // data?.Suggestion?.userInput && console.log( [...JSON.parse( content! ), { insert: data?.Suggestion?.userInput }] )
+            // console.log( data?.Suggestion?.userInput )
+            !isLoading && data?.Suggestion?.userInput &&
+            content && 
+            quill.setContents( [...JSON.parse( content! ), { insert: data?.Suggestion?.userInput }] as any ) 
+            // console.log( data?.Suggestion?.userInput )
         } 
     } )
 
@@ -179,13 +184,21 @@ const Mainscreen: FC = () => {
     } )
 
     return (
-        <div 
-            id="main-doc" 
-            className={ styles.main_doc }
-            unselectable={ "on" }
-        >
+        <>
+            <div 
+                id="main-doc" 
+                className={ styles.main_doc }
+                unselectable={ "on" }
+            >
 
-        </div>
+            </div>
+            {
+                isLoading &&
+                <div className={ styles.suggestion_loading }>
+                    loading...
+                </div>
+            }
+        </>
     )
 }
 

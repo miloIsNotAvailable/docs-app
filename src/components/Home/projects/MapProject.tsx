@@ -36,15 +36,15 @@ const MapProject: FC = () => {
         <div className={ styles.map_project }>
             <NewProject/>
             {
-                !isLoading && data?.projects
+                !isLoading ? data?.projects
                 .map( ( { title, content, id }: any, ind: number ) => (
                     <Project 
                         id={ id }
                         key={ ind }
                         title={ title }
                         content={ content && JSON.parse( content ).map( ( n: any ) => n?.insert ).join( " " ) }
-                    />
-                ) )
+                    /> 
+                ) ) : <div>loading...</div>
             }
         </div>
     )

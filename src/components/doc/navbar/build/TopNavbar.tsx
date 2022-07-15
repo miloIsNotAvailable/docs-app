@@ -9,7 +9,7 @@ const TopNavbar: FC = () => {
         <div className={ styles.top_navbar_wrap }>
             {
                 arr.map( n => (
-                    <div className={ styles.top_navbar }>
+                    <div key={ n } className={ styles.top_navbar }>
                         { n }
                     </div>
                 ) ) 
