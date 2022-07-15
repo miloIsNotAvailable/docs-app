@@ -149,7 +149,7 @@ const Mainscreen: FC = () => {
                     }
                 } )
             }
-            console.log( data )
+            console.log( data, isLoading )
         } 
     } )
 

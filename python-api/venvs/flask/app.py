@@ -5,6 +5,8 @@ from ariadne import load_schema_from_path, make_executable_schema, graphql_sync,
 from ariadne.constants import PLAYGROUND_HTML
 from ariadne.asgi import GraphQL
 import os
+import tensorflow as tf
+import time
 
 # Create type instance for Query type defined in our schema...
 query = QueryType()
@@ -32,8 +34,33 @@ type_defs = gql("""
 """)
 
 @mutation.field( 'Suggestion' )
-def resolve_suggestion(*_, userInput): 
-    return { 'userInput': userInput }
+def resolve_suggestion(*_, userInput=""):
+
+        if userInput != "":
+
+            one_step_reloaded = tf.saved_model.load( os.path.normpath( os.getcwd() + "\\venvs\\flask\\static\\text_gen" ) )
+
+            start = time.time()
+            states = None
+            next_char = tf.constant([ userInput ])
+            # next_char_saved = tf.constant(['this koolaid is rather'])
+            result = [next_char]
+
+
+            # dummy variable since tensorflow won't accept None only [1, 1024] tensor
+            state_saved = tf.zeros([1, 1024], dtype=tf.float32)
+
+            for n in range(1000):
+                if one_step_reloaded is not None:
+                    next_char, state_saved = one_step_reloaded.call( inputs=next_char, states=state_saved )    
+
+                    result.append(next_char)
+        
+            return {
+                'userInput': tf.strings.join(result[1:])[0].numpy().decode("utf-8")
+            }
+        
+        return { 'userInput': userInput }
 
 app = Flask(__name__)
 CORS( app )
