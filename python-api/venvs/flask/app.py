@@ -38,7 +38,8 @@ def resolve_suggestion(*_, userInput=""):
 
         if userInput != "":
 
-            one_step_reloaded = tf.saved_model.load( os.path.normpath( os.getcwd() + "\\venvs\\flask\\static\\text_gen" ) )
+            # one_step_reloaded = tf.saved_model.load( os.path.normpath( os.getcwd() + "\\venvs\\flask\\static\\text_gen" ) )
+            one_step_reloaded = tf.saved_model.load( './static/text_gen' )
 
             start = time.time()
             states = None
