@@ -1,11 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit'
 import { graphqlApi } from './apis/fetchData'
 import getUserData from './slices/getUserFormData'
+import { graphqlApiPython } from './apis/fetchPythonData'
 
 export const store = configureStore({
   reducer: {
       // graphql api 
       [graphqlApi.reducerPath]: graphqlApi.reducer,
+      [graphqlApiPython.reducerPath]: graphqlApiPython.reducer,
       getUserData
   },  
   /**
@@ -13,7 +15,7 @@ export const store = configureStore({
    * automatic caching  
    */
   middleware: (getDefaultMiddleware: any) =>
-  getDefaultMiddleware().concat(graphqlApi.middleware),
+  getDefaultMiddleware().concat([graphqlApi.middleware, graphqlApiPython.middleware]),
 })
 // Infer the `RootState` and `AppDispatch` types from the store itself
 export type RootState = ReturnType<typeof store.getState>

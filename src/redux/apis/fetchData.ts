@@ -161,6 +161,21 @@ export const graphqlApi = createApi( {
                 variables
             } )
         } ),
+
+        getSuggestion: mutation<any, queryType<{
+            id: string,
+            content: string
+        }>>( {
+            query: ( { body, variables } ) => ( {
+                url: `/graphql`,
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: body,
+                variables
+            } )
+        } ),
     } )
 } )
 

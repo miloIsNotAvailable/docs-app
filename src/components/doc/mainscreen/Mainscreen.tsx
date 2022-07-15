@@ -1,11 +1,11 @@
 import { FC, useCallback, useEffect } from "react";
 import { styles } from "../build/DocStyles";
-import { useQuill } from "../../../constants/quillConstants";
 import Quill from "quill";
 import { useQuillContext } from "../../../contexts/QuillContext";
 import { debounce } from "./debounce";
 import { useUpdateDocContentMutation } from "../../../redux/apis/fetchData";
 import { useDocData } from "../../../contexts/DocContext";
+import { useGetSuggestionMutation } from "../../../redux/apis/fetchPythonData";
 
 const UPDATE_DOC = `
 mutation docContent( $id: String, $content:String ) {
@@ -15,6 +15,13 @@ mutation docContent( $id: String, $content:String ) {
     }
   }
 `
+
+const SUGGESTION = `
+mutation Suggest( $userInput: String ) {
+	Suggestion(userInput: $userInput) {
+    userInput
+  }
+}`
 
 const Mainscreen: FC = () => {
 
@@ -129,7 +136,24 @@ const Mainscreen: FC = () => {
         Quill.register( Align, true )
     }, [ quill ] ) 
     
-    const [ setUpdateDocContent, { data, isLoading } ] = useUpdateDocContentMutation()
+    const [ newSuggestion, { data, isLoading } ] = useGetSuggestionMutation()
+
+    useEffect( () => {
+        if( !quill ) return
+        window.onkeydown = e => {
+            if( e.ctrlKey && e.key === " " ) {
+                newSuggestion( {
+                    body: SUGGESTION,
+                    variables: {
+                        userInput: 'hank hill'
+                    }
+                } )
+            }
+            console.log( data )
+        } 
+    } )
+
+    const [ setUpdateDocContent ] = useUpdateDocContentMutation()
 
     const e = debounce( ( args: any, id: any ) => {
         
