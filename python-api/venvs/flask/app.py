@@ -4,6 +4,7 @@ from flask_cors import CORS
 from ariadne import load_schema_from_path, make_executable_schema, graphql_sync, snake_case_fallback_resolvers, ObjectType, gql, QueryType, MutationType
 from ariadne.constants import PLAYGROUND_HTML
 from ariadne.asgi import GraphQL
+import os
 
 # Create type instance for Query type defined in our schema...
 query = QueryType()
@@ -64,4 +65,5 @@ def hello_world():
     return 'Hello!'
 
 if __name__ == '__main__':
-    app.run( debug=True, port=5000 )
+    port = int(os.environ.get('PORT', 5000))
+    app.run( debug=True, port=port )
