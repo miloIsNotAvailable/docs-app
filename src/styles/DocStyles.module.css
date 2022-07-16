@@ -54,6 +54,8 @@
     border-radius: 0 7rem 0 0;
     outline: none;
     border: none;
+    scrollbar-width: thin;
+    scrollbar-face-color: var(--grey);
 }
 
 .main_doc::-webkit-scrollbar {
@@ -135,6 +137,8 @@
     border-radius: .5rem;
     text-align: start;
     transition: all 100ms ease;
+    scrollbar-width: thin;
+    scrollbar-face-color: var(--grey);
 }
 
 .sizes_list::-webkit-scrollbar {
@@ -178,6 +182,8 @@
     box-shadow: 5px 5px 10px 10px rgba( 0, 0, 0, 0.1 );
     z-index: 2;
     transition: all 100ms ease;
+    scrollbar-width: thin;
+    scrollbar-face-color: var(--grey);
 }
 
 .font_family:focus .family_list, .font_family:active .family_list{

@@ -34,7 +34,7 @@ const MapProject: FC = () => {
 
     return (
         <div className={ styles.map_project }>
-            <NewProject/>
+            { id && <NewProject/> }
             {
                 !isLoading ? data?.projects
                 .map( ( { title, content, id }: any, ind: number ) => (
@@ -45,7 +45,7 @@ const MapProject: FC = () => {
                         title={ title }
                         content={ content && JSON.parse( content ).map( ( n: any ) => n?.insert ).join( " " ) }
                     /> 
-                ) ) : <div>loading...</div>
+                ) ) : <div className={ styles.project_loading }>loading...</div>
             }
         </div>
     )
