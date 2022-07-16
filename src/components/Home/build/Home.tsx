@@ -1,12 +1,13 @@
 import { FC, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { UserContextProvider, useUserData } from "../../../contexts/UserContext";
-import { useDecodeJWTMutation, useLogOutUserMutation } from "../../../redux/apis/fetchData";
+import { useUserData } from "../../../contexts/UserContext";
+import { useLogOutUserMutation } from "../../../redux/apis/fetchData";
 import Navbar from "../navbar/Navbar";
 import DisplayProjects from "../projects/DisplayProjects";
 import Bg from "./Bg";
 import { styles } from "./HomeStyles";
 import Title from "./Title";
+import { motion } from "framer-motion";
 
 const DECODE_JWT = `
 mutation jwt($token:String) {
@@ -75,7 +76,12 @@ const Home: FC = () => {
     }
 
     return (
-        <div className={ styles.home_wrap }>
+        <motion.div 
+            className={ styles.home_wrap }
+            initial={ { transform: 'translate(-100%, 0)' } }
+            animate={ { transform: 'translate(0%, 0)' } }
+            exit={ { transform: 'translate(100%, 0)' } }
+        >
             <div onClick={ handleLogOut }>
                 <Navbar/>
             </div>
@@ -91,7 +97,7 @@ const Home: FC = () => {
             <div className={ styles.fill }/>
             <div className={ styles.fill }/>
             <div className={ styles.fill }/>
-        </div>
+        </motion.div>
     )
 }
 

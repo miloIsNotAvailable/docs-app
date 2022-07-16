@@ -7,19 +7,25 @@ interface ProjectProps {
     title: string
     content: string
     id: string
+    ind: number
 }
 
 const Project: FC<ProjectProps> = ( {
     content,
     title,
-    id
+    id,
+    ind
 } ) => {
 
     return (
         <AnimatePresence exitBeforeEnter>
             <motion.div 
+                transition={ { delay: ind * .1 } }
+                initial={ { opacity: 0, transform: 'translate(0, -100%)' } }
+                animate={ { opacity: 1, transform: 'translate(0, 0%)' } }
+                exit={ { opacity: 0, transform: 'translate(0, 100%)' } }
                 className={ styles.display_project }
-                whileHover={ { gridRow: 'span 2', height: '100%' } }
+                whileHover={ { gridRow: 'span 2', maxHeight: '100%', height: '100%' } }
             >
                 <Link to={ `/home/${ id }` }>
                     <div className={ styles.display_project_title }>

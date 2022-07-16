@@ -41,6 +41,7 @@ const MapProject: FC = () => {
                     <Project 
                         id={ id }
                         key={ ind }
+                        ind={ ind }
                         title={ title }
                         content={ content && JSON.parse( content ).map( ( n: any ) => n?.insert ).join( " " ) }
                     /> 
