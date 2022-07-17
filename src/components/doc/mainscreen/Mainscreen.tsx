@@ -1,4 +1,4 @@
-import { FC, useCallback, useEffect } from "react";
+import { FC, useCallback, useEffect, useState } from "react";
 import { styles } from "../build/DocStyles";
 import Quill from "quill";
 import { useQuillContext } from "../../../contexts/QuillContext";
@@ -149,14 +149,13 @@ const Mainscreen: FC = () => {
                     }
                 } )
             }
-            // data?.Suggestion?.userInput && console.log( [...JSON.parse( content! ), { insert: data?.Suggestion?.userInput }] )
-            // console.log( data?.Suggestion?.userInput )
-            !isLoading && data?.Suggestion?.userInput &&
-            content && 
-            quill.setContents( [...JSON.parse( content! ), { insert: data?.Suggestion?.userInput }] as any ) 
-            // console.log( data?.Suggestion?.userInput )
         } 
     } )
+
+    useEffect( () => {
+        if( !content || !quill || !data?.Suggestion?.userInput ) return
+        quill.setContents( [...JSON.parse( content! ), { insert: data?.Suggestion?.userInput }] as any ) 
+    }, [ isLoading ] )
 
     const [ setUpdateDocContent ] = useUpdateDocContentMutation()
 
