@@ -20,22 +20,24 @@ mutation jwt($token:String) {
 
 function App() {
 
-  const[ decodeJWT, { data, isLoading } ] = useDecodeJWTMutation()
+  const[ decodeJWT, { data, isLoading } ] = useDecodeJWTMutation( {
+    fixedCacheKey: 'login-result'
+  } )
   // const [ createUser, { data: getUserData } ] = useSendUserDataMutation( {
   //     fixedCacheKey: 'sign-up-result'
   //   } )
 
   // const navigate = useNavigate()
 
-  useEffect( () => {
+  // useEffect( () => {
 
-      const token = localStorage.getItem( 'sessionToken' )
+  //     const token = localStorage.getItem( 'sessionToken' )
 
-      token && decodeJWT( {
-          body: DECODE_JWT,
-          variables: { token }
-      } )
-  }, [] )
+  //     token && decodeJWT( {
+  //         body: DECODE_JWT,
+  //         variables: { token }
+  //     } )
+  // }, [] )
 
   // useEffect( () => {
   //     !isLoading && data && !data?.decodeJWT?.newToken

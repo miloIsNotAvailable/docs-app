@@ -1,7 +1,7 @@
 import { FC, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useUserData } from "../../../contexts/UserContext";
-import { useLogOutUserMutation } from "../../../redux/apis/fetchData";
+import { useDecodeJWTMutation, useLogOutUserMutation } from "../../../redux/apis/fetchData";
 import Navbar from "../navbar/Navbar";
 import DisplayProjects from "../projects/DisplayProjects";
 import Bg from "./Bg";
@@ -32,7 +32,9 @@ mutation logOutUser($id: String){
 
 const Home: FC = () => {
 
-    // const[ decodeJWT, { data, isLoading } ] = useDecodeJWTMutation()
+    const[ decodeJWT, { data, isLoading: loading } ] = useDecodeJWTMutation( {
+        fixedCacheKey: 'login-result'
+      } )    
     // const [ createUser, { data: getUserData } ] = useSendUserDataMutation( {
     //     fixedCacheKey: 'sign-up-result'
     //   } )
@@ -41,15 +43,15 @@ const Home: FC = () => {
 
     const navigate = useNavigate()
 
-    // useEffect( () => {
+    useEffect( () => {
 
-    //     const token = localStorage.getItem( 'sessionToken' )
+        const token = localStorage.getItem( 'sessionToken' )
 
-    //     token && decodeJWT( {
-    //         body: DECODE_JWT,
-    //         variables: { token }
-    //     } )
-    // }, [] )
+        token && decodeJWT( {
+            body: DECODE_JWT,
+            variables: { token }
+        } )
+    }, [] )
 
     useEffect( () => {
         !isLoading && email && !newToken
