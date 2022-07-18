@@ -40,12 +40,15 @@ const Submit: FC = () => {
 
     useEffect( () => {
       
-              // if done loading and user gets created 
+        // if done loading and user gets created 
         // navigate to home
+        
+        console.log(data?.getUserData?.sessionToken)
+
         data?.getUserData?.sessionToken && 
         !isLoading && !isError && navigate( '/home' )
         
-        data?.getUserData?.sessionToken && 
+        !isLoading && data?.getUserData?.sessionToken && 
         localStorage.setItem( 'sessionToken', data?.getUserData?.sessionToken ) 
 
     }, [ data ] )
