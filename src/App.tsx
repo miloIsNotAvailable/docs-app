@@ -20,6 +20,15 @@ mutation jwt($token:String) {
 
 function App() {
 
+/**
+ * decode JWT in App, so it can be put in context
+ * and used in all other routes
+*/
+
+  /**
+   * @param decodeJWT gets dispatched in /src/Home.tsx
+   * since the JWT wouldnt get decoded after login 
+   */
   const[ decodeJWT, { data, isLoading } ] = useDecodeJWTMutation( {
     fixedCacheKey: 'login-result'
   } )

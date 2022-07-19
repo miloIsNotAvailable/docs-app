@@ -10,6 +10,13 @@ const FontFamily: FC = () => {
     const [ fonts, setFonts ] = useState<string[]>( [ 'Arial' ] )
     const [ currentFont, setCurrentFont ] = useState( "Arial" )
 
+    /**
+     * import fonts whitelist after new instance 
+     * of quill is created, put it in setTimeout 
+     * since the whitelist loads later, calling 
+     * it after quill is created will return 
+     * default whitelist set in quill
+     */
     useEffect( () => {
         if( !quill ) return
         setTimeout( () => {

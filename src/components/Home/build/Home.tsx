@@ -32,6 +32,12 @@ mutation logOutUser($id: String){
 
 const Home: FC = () => {
 
+    /**
+     * @param decodeJWT gets dispatched here 
+     * so after login user doesn't have to 
+     * refresh their page to get a new token
+     */ 
+
     const[ decodeJWT, { data, isLoading: loading } ] = useDecodeJWTMutation( {
         fixedCacheKey: 'login-result'
       } )    

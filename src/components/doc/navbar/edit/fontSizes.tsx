@@ -45,7 +45,11 @@ const FontSizes: FC = () => {
                             quill?.format( 'size', '11px' ); 
                             return 
                         }
-                        
+                        /**
+                         * when input size does not exist
+                         * in whitelist, change it to the closest 
+                         * available
+                         */
                         setCurrentSize( 
                             findClosest(
                                 parseInt(inputRef.current?.innerText)

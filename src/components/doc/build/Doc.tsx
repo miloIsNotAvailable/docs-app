@@ -23,8 +23,13 @@ query userProject( $id:String ){
 
 const Doc: FC = () => {
 
+    // get params from dynamic route 
+    // so you know project id
     const { id } = useParams()
     console.log( id )
+    /**
+     * @param quill creates new instance of quill
+     */
     const quill = useQuill()
 
     const [getProject, { data, isLoading }] = useLazyGetProjectQuery()
@@ -39,6 +44,15 @@ const Doc: FC = () => {
     }, [ id ] )
     
     console.log( data )
+
+    /**
+     * create a new instance of quill here
+     * and pass it to the context so it can be reused
+     * across different functions, 
+     * otherwise if you create a new instance for 
+     * every function ( call useQuill ) 
+     * it'll break 
+     */
 
     return (
         <QuillContextProvider value={ quill }>
