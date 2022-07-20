@@ -6,6 +6,14 @@ import FontWeight from "../edit/FontWeight";
 
 const Navbar: FC = () => {
 
+    if( window.innerWidth < 900 ) return (
+        <div className={ styles.navbar }>
+            <FontFamily/>
+            <FontSizes/>
+            <FontWeight/>
+        </div>
+    )
+
     return (
         <div className={ styles.navbar }>
             <FontFamily/>

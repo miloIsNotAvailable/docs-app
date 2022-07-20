@@ -218,3 +218,107 @@
     padding: .5rem 2rem;
     border-radius: .2rem;
 }
+
+@media ( max-width: 900px ) {
+    .doc_wrap {
+        position: absolute;
+        display: grid;
+        grid-template-rows: 6vw 2rem auto;
+        width: 100%;
+        height: 100%;
+        font-family: 'Poppins';
+        color: white;
+    }       
+    .main_doc_wrap {
+        display: grid;
+        grid-template-columns: 100%;
+        grid-template-rows: auto 10vw;
+        width: 100%;
+        height: 100%;
+        max-height: 100%;
+        overflow-y: hidden;
+        background-color: var(--grey);
+        border-radius: 0 0 0 0;
+    }
+    .main_doc {
+        width: 100%;
+        height: 100%;
+        max-height: 100%;
+        overflow-y: auto;
+        background-color: var(--dark);
+        border-radius: 0 0 0 0;
+        outline: none;
+        border: none;
+        scrollbar-width: thin;
+        scrollbar-face-color: var(--grey);
+    }
+
+    .navbar {
+        /* position: absolute; */
+        display: grid;
+        grid-template-columns: auto auto auto;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+        background-color: var(--bg);
+        padding: 0 .5rem;
+        grid-row: 2;
+        gap: 1rem;
+    }
+    .font_family {
+        position: relative;
+        display: grid;
+        grid-template-columns: 80% 20%;
+        width: clamp( 3rem, 100%, 100% );
+        height: auto;
+        align-items: center;
+        place-self: center;
+    }
+    
+    .current_font_size {
+        display: grid;
+        grid-template-columns: 80% 20%;
+        width: clamp( 3rem, 100%, 100% );
+        place-items: center;
+        place-self: center;
+        /* height: 3vw; */
+    }
+
+    .more {
+        display: grid;
+        place-self: center;
+        width: .5rem;
+        height: .5rem;
+        transition: all 100ms ease;
+    }
+    .font_weights {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        width: 100%;
+        height: 3vw;
+    }
+
+    .doc_title_wrap {
+        display: grid;
+        grid-template-columns: 5vw auto;
+        align-items: center;
+    }
+    
+    .doc_icon {
+        display: grid;
+        place-self: center;
+        width: calc(100% - .5rem);
+        height: calc(100% - .5rem);
+    }
+    
+    .doc_title {
+        font-size: 3vw;
+        font-weight: bolder;
+    }
+    .top_navbar {
+        cursor: pointer;
+        font-size: .7rem;
+        font-weight: normal;
+    }
+}
