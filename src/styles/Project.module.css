@@ -110,3 +110,47 @@
     font-size: 2rem;
     color: white
 }
+
+@media ( max-width: 900px ) {
+    .map_project {
+        display: grid;
+        padding: 1rem;
+        grid-template-columns: 100%;
+        grid-auto-rows: 10vw;
+        gap: 14vw;      
+    }
+
+    
+.display_project {
+    display: grid;
+    grid-template-rows: 3rem auto;
+    background-color: var(--bg);
+    border: 1px solid white;
+    border-radius: .2rem;
+    width: calc(100%);
+    min-height: 22vw;
+    max-height: 30vw;
+    overflow-y: hidden;
+    grid-row: span 1;
+    transition: all 100ms ease;
+    }
+
+    .new_project {
+        cursor: pointer;
+        position: relative;
+        display: grid;
+        place-items: center;
+        background-color: var(--bg);
+        border: 1px solid white;
+        border-radius: .2rem;
+        width: 100%;
+        min-height: 22vw;
+        grid-row: span 1;
+        font-family: 'Poppins';
+        font-weight: normal;
+        color: white;
+        font-size: 3vw;
+        text-decoration: none;
+    }
+    
+}

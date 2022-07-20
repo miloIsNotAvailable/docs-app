@@ -95,7 +95,7 @@ const Home: FC = () => {
             </div>
             <div className={ styles.fill }/>
             <div className={ styles.fill }/>
-            <Bg/>
+            { window.innerWidth > 900 && <Bg/> }
             <div className={ styles.fill }/>
             <Title/>
             <div className={ styles.fill }/>

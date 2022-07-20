@@ -34,3 +34,28 @@
     color: white;
     font-weight: bolder;
 }
+
+@media ( max-width: 900px ) {
+    .home_wrap {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        display: grid;
+        --grid-panel: 7vw;
+        grid-template-columns: var(--grid-panel) auto var(--grid-panel);
+        grid-template-rows: var(--grid-panel) var(--grid-panel) auto var(--grid-panel);
+        gap: 1px;
+        background-color: white;
+    }    
+    .bg_wrap {
+        display: grid;
+        place-items: center;
+        width: 0%;
+        height: 0%;
+        visibility: collapse;
+        opacity: 0;
+        background-color: var(--bg);
+        grid-row: span 4;
+        grid-column: 4/5;
+    }
+}
